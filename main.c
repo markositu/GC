@@ -60,8 +60,11 @@ int main(int argc, char** argv) {
     initialization();
     //añade una camara por defecto
      camara* camaraDefault=(camara*)malloc(10*sizeof(camara));
+     glLoadIdentity();
      gluLookAt(0,0,0,50,0,0,0,1,0);
      glGetFloatv(GL_MODELVIEW_MATRIX,camaraDefault->matrizCamara);
+     glLoadIdentity();
+     glGetFloatv(GL_MODELVIEW_MATRIX,camaraDefault->matrizTransformaciones);
      _selected_camara=camaraDefault;
 
     /* start the main loop */

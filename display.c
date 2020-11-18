@@ -102,9 +102,13 @@ void display(void) {
         }
 
         /* Draw the object; for each face create a new polygon with the corresponding vertices */
-       glLoadMatrixf(aux_obj->primera_matrizptr->matriz);
+        
+        glLoadMatrixf(_selected_camara->matrizTransformaciones);
        glMultMatrixf(_selected_camara->matrizCamara);
-       glRotatef(180,0.5,0,0);
+       glMultMatrixf(aux_obj->primera_matrizptr->matriz);
+
+       
+       //glRotatef(45,0.5,0,0);
 
         for (f = 0; f < aux_obj->num_faces; f++) {
             glBegin(GL_POLYGON);

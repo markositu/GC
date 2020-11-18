@@ -5,6 +5,7 @@
 
 extern object3d * _first_object;
 extern object3d * _selected_object;
+extern camara *_selected_camara;
 
 extern GLdouble _ortho_x_min,_ortho_x_max;
 extern GLdouble _ortho_y_min,_ortho_y_max;
@@ -273,6 +274,13 @@ void keyboard(unsigned char key, int x, int y) {
     case 'k':
     case 'K':
 
+    glLoadMatrixf(_selected_camara->matrizTransformaciones);
+    glTranslatef(1,0,0);
+    glGetFloatv(GL_MODELVIEW_MATRIX,_selected_camara->matrizTransformaciones);
+    glLoadIdentity();
+    glutPostRedisplay();
+
+
     break;
     case 'f':
     case 'F':
@@ -302,11 +310,11 @@ void keyboard(unsigned char key, int x, int y) {
             //
             _selected_object->primera_matrizptr=(lista_matrices*)malloc(1000*sizeof(lista_matrices));// poner en documentación que solo se pueden hacer mil transformaciones
           
-            //glLoadIdentity();
+            glLoadIdentity();
             glGetFloatv(GL_MODELVIEW_MATRIX,_selected_object->primera_matrizptr->matriz);
-            _selected_object->primera_matrizptr->matriz[12]=0;
+            /*_selected_object->primera_matrizptr->matriz[12]=0;
             _selected_object->primera_matrizptr->matriz[13]=0;
-            _selected_object->primera_matrizptr->matriz[14]=0;
+            _selected_object->primera_matrizptr->matriz[14]=0;*/
            
             //
             printf("%s\n",KG_MSSG_FILEREAD);
